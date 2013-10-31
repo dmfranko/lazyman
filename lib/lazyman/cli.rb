@@ -4,7 +4,7 @@ module Lazyman
 	class CLI < Thor	
 		include Thor::Actions
 
-		argument :app_name, required: false
+		argument :app_name
 
 		def self.source_root
 			File.join File.dirname(__FILE__), 'generators'

@@ -38,12 +38,4 @@ RSpec.configure do |c|
 		end
 		Psych.load ERB.new(content).result(binding)
 	end
-	
-	c.before(:suite) do
-		$navi = <%= app_name.camelize %>Navigator.new $config
-	end
-
-	c.after(:suite) do
-		$navi.close
-	end
 end
