@@ -8,10 +8,10 @@ Gem::Specification.new do |s|
   s.version = "0.1.13"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["easonhan"]
-  s.date = "2013-07-24"
+  s.authors = ["Dan Franko"]
+  s.date = "2013-10-31"
   s.description = "A test framework using watir-webdriver rspec and page-object"
-  s.email = "nbkhic@qq.com"
+  s.email = "dan.franko@yale.edu"
   s.executables = ["lazyman"]
   s.extra_rdoc_files = [
     "LICENSE.txt",
@@ -73,7 +73,7 @@ Gem::Specification.new do |s|
     "spec/spec_helper.rb",
     "spec/string_spec.rb"
   ]
-  s.homepage = "https://github.com/easonhan007/lazyman"
+  s.homepage = "https://github.com/dmfranko/lazyman"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.17"
