@@ -2,6 +2,8 @@ ENV.delete 'HTTP_PROXY' if ENV['HTTP_PROXY']
 require 'rubygems' #for ruby187
 require 'erb'
 require 'psych'
+require 'rspec-rerun'
+require 'fuubar'
 
 begin
 	require 'lazyman'
@@ -18,7 +20,11 @@ RSpec.configure do |c|
 	c.run_all_when_everything_filtered = true
 	c.alias_example_to :test_case
 	c.alias_it_should_behave_like_to :include_shared
-	c.syntax = :expect
+	c.add_formatter("Fuubar")
+	
+	c.expect_with :rspec do |e|
+		e.syntax = :expect
+	end
 
 	unless($config.tags.empty?)
 		tags = case 
