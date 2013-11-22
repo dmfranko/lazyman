@@ -1,5 +1,6 @@
 ---
 browsers:
   - firefox
+  - chrome
 host: www.yale.edu
 tags: yale

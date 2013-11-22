@@ -21,7 +21,6 @@ Gem::Specification.new do |s|
   s.files = [
     ".document",
     "Gemfile",
-    "Gemfile.lock",
     "LICENSE.txt",
     "README.md",
     "README.rdoc",
@@ -86,39 +85,32 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<rspec>, [">= 2.13.0"])
       s.add_runtime_dependency(%q<page-object>, [">= 0.8.6.1"])
       s.add_runtime_dependency(%q<thor>, [">= 0.14.6"])
-      s.add_runtime_dependency(%q<active_support>, ["~> 3.0.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_development_dependency(%q<rspec>, [">= 2.13.0"])
       s.add_development_dependency(%q<page-object>, [">= 0.8.6.1"])
       s.add_development_dependency(%q<thor>, [">= 0.14.6"])
-      s.add_development_dependency(%q<active_support>, ["~> 3.0.0"])
     else
       s.add_dependency(%q<rspec>, [">= 2.13.0"])
       s.add_dependency(%q<page-object>, [">= 0.8.6.1"])
       s.add_dependency(%q<thor>, [">= 0.14.6"])
-      s.add_dependency(%q<active_support>, ["~> 3.0.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
       s.add_dependency(%q<rspec>, [">= 2.13.0"])
       s.add_dependency(%q<page-object>, [">= 0.8.6.1"])
       s.add_dependency(%q<thor>, [">= 0.14.6"])
-      s.add_dependency(%q<active_support>, ["~> 3.0.0"])
     end
   else
     s.add_dependency(%q<rspec>, [">= 2.13.0"])
     s.add_dependency(%q<page-object>, [">= 0.8.6.1"])
     s.add_dependency(%q<thor>, [">= 0.14.6"])
-    s.add_dependency(%q<active_support>, ["~> 3.0.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
     s.add_dependency(%q<rspec>, [">= 2.13.0"])
     s.add_dependency(%q<page-object>, [">= 0.8.6.1"])
     s.add_dependency(%q<thor>, [">= 0.14.6"])
-    s.add_dependency(%q<active_support>, ["~> 3.0.0"])
   end
 end
 
