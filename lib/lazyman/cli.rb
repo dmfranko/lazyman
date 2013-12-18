@@ -37,8 +37,14 @@ module Lazyman
     def c
       run 'bin/console'
     end
+    
+    desc "new_page", "create a new page"
+    def new_page
+      template('template_page.rb.tt', "#{name}_page.rb")
+    end
+    
 
-    desc "new_spec", "create a new spec and page"
+    desc "new_spec", "create a new spec"
     method_option :type,
       :default => "browser",
       :aliases => "-t",

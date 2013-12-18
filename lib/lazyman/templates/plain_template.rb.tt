@@ -1,2 +1,22 @@
-class <%= name.capitalize %>
+#encoding: utf-8
+require File.expand_path 'app/spec/spec_helper'
+
+describe "The vanilla template",:template do
+  before(:all) do
+    # Do something to set things up
+  end
+  
+  after(:all) do
+    # Do something to tear things down
+  end
+
+  it 'will always fail' do
+    expect(false).to be_true
+  end
+
+  it 'will always pass' do
+    expect(pass).to be_true
+  end
+
+  it 'is pending'
 end

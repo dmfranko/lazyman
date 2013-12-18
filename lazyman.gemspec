@@ -54,6 +54,7 @@ Gem::Specification.new do |s|
     "lib/lazyman/templates/browser_spec_template.rb.tt",
     "lib/lazyman/templates/web_service_template.rb.tt",
     "lib/lazyman/templates/plain_template.rb.tt",
+    "lib/lazyman/templates/template_page.rb.tt",
     "lib/lazyman/lazy_config.rb",
     "lib/lazyman/lazy_initializer.rb",
     "lib/lazyman/lazy_navigator.rb",

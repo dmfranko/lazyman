@@ -1,2 +1,18 @@
-class <%= name.capitalize %>
+require 'active_support/core_ext/hash/conversions'
+require File.expand_path 'app/specs/spec_helper'
+
+describe "Template tests",:template do
+  before(:all) do
+    client = Savon.client(wsdl: "http://www.webservicex.net/stockquote.asmx?WSDL",
+    #:basic_auth => [$config["user"]["name"], $config["user"]["password"]],
+    :log_level => :error)
+  
+    response = client.call(:get_quote, message: { symbol: "Goog"})
+    # Create a hash out of the response
+    @hashedResponse = Hash.from_xml(response.to_hash[:get_quote_response][:get_quote_result])
+  end
+  
+  it 'returns the symbol' do
+    expect(@hashedResponse["StockQuotes"]["Stock"]["Symbol"]).to eq "GOOG"
+  end
 end

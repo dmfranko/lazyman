@@ -1,0 +1,10 @@
+#encoding: utf-8
+
+class <%= name.capitalize%>Page
+  button(:goButton,:value => "Go")
+  
+  def doSomething
+    self.goButton
+    turn_to AnotherPage
+  end
+end

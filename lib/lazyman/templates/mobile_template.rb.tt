@@ -1,2 +1,15 @@
-class <%= name.capitalize %>
+#encoding: utf-8
+require File.expand_path 'app/spec/spec_helper'
+
+describe "The mobile template",:template do
+  before(:all) do
+    # Do something to set things up
+  end
+  
+  after(:all) do
+    # Do something to tear things down
+  end
+
+  it 'will do something with a mobile device(s)'
+
 end
