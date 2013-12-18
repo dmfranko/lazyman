@@ -8,5 +8,5 @@
 		Psych.load ERB.new(content).result(binding)
 	end
 <% require 'active_support/all' %>
-	$navi = <%= app_name.camelize %>Navigator.new $config
+	$navi = <%= name.camelize %>Navigator.new $config
 

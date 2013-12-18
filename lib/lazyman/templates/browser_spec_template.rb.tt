@@ -1,0 +1,22 @@
+#encoding: utf-8
+require File.expand_path 'app/spec/spec_helper'
+
+$browsers.each do |b|
+  describe "The template using the '#{b}' browser",:template do
+    before(:all) do
+      @browser = initBrowser(b,:platform => :VISTA)
+      @yale_page = YalePage.new(@browser)
+      @yale_page.goto
+    end
+
+    it 'will always fail' do
+      expect(false).to be_true
+    end
+
+    it 'is pending'
+
+    after(:all) do
+    	@browser.close rescue nil
+    end
+  end
+end

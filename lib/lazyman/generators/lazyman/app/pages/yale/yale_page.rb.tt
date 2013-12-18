@@ -1,5 +1,5 @@
 #encoding: utf-8
-class YalePage < <%= app_name.camelize%>Page
+class YalePage < <%= name.camelize%>Page
   page_url 'www.yale.edu'
 
   table 'news', id: 'news'
