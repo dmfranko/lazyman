@@ -1,5 +1,5 @@
 #encoding: utf-8
-require File.expand_path 'app/cases/spec_helper'
+require File.expand_path 'app/spec/spec_helper'
 
 $config["browsers"].each do |b|
     describe 'The Yale home page', :yale do

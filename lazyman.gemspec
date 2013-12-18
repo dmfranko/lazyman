@@ -33,9 +33,18 @@ Gem::Specification.new do |s|
     "lib/lazyman/errors.rb",
     "lib/lazyman/ext/string.rb",
     "lib/lazyman/generators/lazyman/.rspec",
-    "lib/lazyman/generators/lazyman/app/cases/yale/yale_example_spec.rb",
-    "lib/lazyman/generators/lazyman/app/cases/shared/login.rb",
-    "lib/lazyman/generators/lazyman/app/cases/spec_helper.rb.tt",
+    "lib/lazyman/generators/lazyman/app/spec/yale/yale_example_spec.rb",
+    "lib/lazyman/generators/lazyman/app/spec/shared/login.rb",
+    "lib/lazyman/generators/lazyman/app/spec/spec_helper.rb.tt",
+    
+    "lib/lazyman/generators/lazyman/app/spec/support/formatters/dry_run_formatter.rb",
+    "lib/lazyman/generators/lazyman/app/spec/support/formatters/html_override.rb",
+    "lib/lazyman/generators/lazyman/app/spec/support/formatters/lazyman_formatter.rb",
+    
+    "lib/lazyman/generators/lazyman/app/spec/support/matchers/custom_matcher.rb",
+    "lib/lazyman/generators/lazyman/app/spec/support/matchers/email_matcher.rb",
+    "lib/lazyman/generators/lazyman/app/spec/support/matchers/file_matcher.rb",
+    
     "lib/lazyman/generators/lazyman/app/matchers/.empty_directory",
     "lib/lazyman/generators/lazyman/app/pages/%name%_navigator.rb.tt",
     "lib/lazyman/generators/lazyman/app/pages/%name%_page.rb.tt",
