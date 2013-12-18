@@ -44,7 +44,7 @@ module RSpec
           @output.puts "</html>"
 
           # Send a note to all the emails!
-          gmail = Gmail.new("yaleqa@gmail.com","qcrm2012")
+          gmail = Gmail.new("yaleqa@gmail.com","")
           gmail.deliver do
             to $emails
             subject "Test is complete!"

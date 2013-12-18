@@ -15,13 +15,13 @@ require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "lazyman"
-  gem.homepage = "http://github.com/nbkhic@qq.com/lazyman"
+  gem.homepage = "https://github.com/dmfranko/magic_spec"
   gem.license = "MIT"
   gem.summary = %Q{A simple web automation test framework}
   gem.description = %Q{A test framework using watir-webdriver rspec and page-object}
-  gem.email = "nbkhic@qq.com"
-	gem.homepage = 'https://github.com/easonhan007/lazyman'
-  gem.authors = ["easonhan"]
+  gem.email = "dan.franko@yale.edu"
+	gem.homepage = 'https://github.com/dmfranko/magic_spec'
+  gem.authors = ["easonhan,dmfranko"]
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
