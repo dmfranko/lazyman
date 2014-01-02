@@ -137,6 +137,7 @@ EOF
 #rspec-header {
   background: #65C400; color: #fff; height: 250px;
   margin: 10px 10px 10px 10px;
+  position: relative;
 }
 
 .rspec-report h1 {
@@ -163,9 +164,10 @@ EOF
 }
 
 #display-filters {
-  float:left;
-  padding: 28px 0 0 40%;
-  font-family: "Lucida Grande", Helvetica, sans-serif;
+    font-family: "Lucida Grande",Helvetica,sans-serif;
+    position: absolute;
+    bottom: 0;
+    left: 20px;
 }
 
 #summary {
