@@ -31,6 +31,7 @@ module RSpec
           @output.puts "<script type=\"text/javascript\">document.getElementById('duration').innerHTML = \"Finished in <strong>#{formatted_duration} seconds</strong>\";</script>"
           @output.puts "<script type=\"text/javascript\">document.getElementById('totals').innerHTML = \"#{totals}\";</script>"
           @output.puts "<script type=\"text/javascript\">document.getElementById('browser').innerHTML = \"#{Uname.sysname}\";</script>"
+          @output.puts "<script type=\"text/javascript\">localStorage.g=JSON.stringify([['Pass',#{example_count}],['Fail',#{failure_count}],['Pending',#{pending_count}]])"
           @output.puts "</div>"
           @output.puts "</div>"
           @output.puts "</body>"
@@ -99,16 +100,7 @@ module RSpec
             series: [{
                 type: 'pie',
                 name: 'Browser share',
-                data: [
-                    ['Pass',   10],
-                    ['Fail',       15],
-                    {
-                        name: 'Not Implemented',
-                        y: 5,
-                        sliced: true,
-                        selected: true
-                    }
-                ]
+                data: JSON.parse(localStorage.g)
             }]
         });
     });
