@@ -54,13 +54,13 @@ module Lazyman
     def new_spec
       case options["type"].downcase
       when "browser"
-        template('browser_spec_template.rb.tt', "./app/specs/#{name}_spec.rb")
+        template('browser_spec_template.rb.tt', "./app/spec/#{name}_spec.rb")
       when "webservice"
-        template('web_service_template.rb.tt', "./app/specs/#{name}_spec.rb")
+        template('web_service_template.rb.tt', "./app/spec/#{name}_spec.rb")
       when "plain"
-        template('plain_template.rb.tt', "./app/specs/#{name}_spec.rb")
+        template('plain_template.rb.tt', "./app/spec/#{name}_spec.rb")
       when "mobile"
-        template('mobile_template.rb.tt', "./app/specs/#{name}_spec.rb")
+        template('mobile_template.rb.tt', "./app/spec/#{name}_spec.rb")
       else
         say "Sorry :(. I'm not sure what you're trying to do?"
       end

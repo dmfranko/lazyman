@@ -8,5 +8,4 @@ class String
 		end #each
 		hash
 	end
-
 end

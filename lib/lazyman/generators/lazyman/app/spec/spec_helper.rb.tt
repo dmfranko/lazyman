@@ -54,8 +54,8 @@ RSpec.configure do |c|
   c.run_all_when_everything_filtered = true
   c.alias_example_to :test_case
   c.alias_it_should_behave_like_to :include_shared
-  
   c.color_enabled = true
+  c.include SpecTestHelper
   
   # Force expect syntax
   c.expect_with :rspec do |e|
