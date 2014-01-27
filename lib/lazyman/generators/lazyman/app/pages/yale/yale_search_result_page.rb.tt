@@ -1,5 +1,6 @@
 #encoding: utf-8
-class YaleSearchResultPage < <%= name.camelize%>Page
+class YaleSearchResultPage
+	include PageObject
     div 'results', id: 'searchResults'
     
     def term_found? kw

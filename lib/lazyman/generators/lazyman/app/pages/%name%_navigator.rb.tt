@@ -1,4 +1,0 @@
-#encoding: utf-8
-<% require 'active_support/all' %>
-class <%= @name.camelize %>Navigator < Lazyman::Navigator
-end

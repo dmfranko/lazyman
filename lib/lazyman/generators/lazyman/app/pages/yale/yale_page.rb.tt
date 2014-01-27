@@ -1,5 +1,6 @@
 #encoding: utf-8
-class YalePage < <%= name.camelize%>Page
+class YalePage
+  include PageObject
   page_url 'www.yale.edu'
 
   table 'news', id: 'news'
