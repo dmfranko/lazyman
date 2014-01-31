@@ -24,12 +24,13 @@ module Lazyman
       end
     end
 
-    desc 'go ', 'run test case with rspec'
+    desc 'run ', 'run test case with rspec'
 
-    def go
+    def start
       ARGV.shift
       puts "rspec #{ARGV.join('')}" if $debug
-      run "rspec #{ARGV.join('')}"
+      #run "LOCAL=true rspec #{ARGV.join('')}"
+      run "LOCAL=true rspec"
     end
 
     desc 'c ', 'open lazyman console'
