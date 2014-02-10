@@ -1,6 +1,6 @@
 require 'thor'
 
-module Lazyman
+module Magicspec
   class CLI < Thor
     include Thor::Actions
 
@@ -13,11 +13,11 @@ module Lazyman
       [source_root + '/generators', source_root + '/templates']
     end
     
-    desc 'new NAME', 'create a lazyman project'
+    desc 'new NAME', 'create a magicspec project'
     def new(name)
       @name = name
       if name
-        directory 'lazyman', name
+        directory 'magicspec', name
       else
         say 'no app name'
       end
@@ -31,14 +31,15 @@ module Lazyman
       run "LOCAL=true rspec"
     end
 
-    desc 'c ', 'open lazyman console'
-
+    # Might just dump the console
+    desc 'c ', 'open magicspec console'
     def c
       run 'bin/console'
     end
     
     desc "new_page NAME", "create a new page"
     def new_page(name)
+      @name = name
       template('template_page.rb.tt', "./app/pages/#{name}_page.rb")
     end
     
@@ -52,6 +53,7 @@ module Lazyman
 
     # Could probably stand to DRY this up a bit, but it works fine.
     def new_spec(name)
+      @name = name
       case options["type"].downcase
       when "browser"
         template('browser_spec_template.rb.tt', "./app/spec/#{name}_spec.rb")

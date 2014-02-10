@@ -1,4 +1,4 @@
-module Lazyman
+module Magicspec
 	class Initializer
 		def initialize root, app_name
 			@root ||= root
@@ -30,4 +30,4 @@ module Lazyman
 			$pages = @pages_path
 		end
 	end
-end #Lazyman
+end #Magicspec

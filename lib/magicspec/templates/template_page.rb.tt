@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class <%= name.capitalize%>Page
+class <%= @name.capitalize%>Page
   include PageObject
   button(:goButton,:value => "Go")
   

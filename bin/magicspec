@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+magicspec_path = File.expand_path('../../lib', __FILE__)
+$:.unshift(magicspec_path)
+
+require 'magicspec/cli'

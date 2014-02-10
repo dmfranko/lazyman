@@ -1,3 +1,3 @@
-sudo gem uninstall lazyman
-gem build lazyman.gemspec
-sudo gem install lazyman
+sudo gem uninstall magicspec
+gem build magicspec.gemspec
+sudo gem install magicspec 

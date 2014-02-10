@@ -3,7 +3,7 @@ require 'erb'
 require 'psych'
 require 'rspec-rerun'
 require 'fuubar'
-require 'lazyman' 
+require 'magicspec' 
 require 'active_record'
 require 'net/http'
 require 'byebug'
@@ -34,14 +34,11 @@ class Hash
 end
 
 <% require 'active_support/all' %>
-Lazyman::Initializer.new(File.expand_path(File.join('.')), '<%= @name %>')
+Magicspec::Initializer.new(File.expand_path(File.join('.')), '<%= @name %>')
 $:.unshift(File.expand_path File.join('.'))
 
 # Make sure all of our supporting files are loaded
 Dir["./app/spec/support/**/*.rb"].sort.each {|f|require f}
-
-Lazyman::Initializer.new(File.expand_path(File.join('.')), 'trial2')
-$:.unshift(File.expand_path File.join('.'))
 
 RSpec.configure do |c|
   c.treat_symbols_as_metadata_keys_with_true_values = true

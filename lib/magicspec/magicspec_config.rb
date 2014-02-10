@@ -1,8 +1,8 @@
 require 'yaml'
-require 'lazyman/errors'
+require 'magicspec/errors'
 require 'ostruct'
 
-module Lazyman
+module Magicspec
 	class Config
 		attr_reader :hash_content, :content
 		
@@ -18,4 +18,4 @@ module Lazyman
 		end
 
 	end
-end #Lazyman
+end #Magicspec

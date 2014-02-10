@@ -1,6 +1,0 @@
-#!/usr/bin/env ruby
-
-lazyman_path = File.expand_path('../../lib', __FILE__)
-$:.unshift(lazyman_path)
-
-require 'lazyman/cli'
