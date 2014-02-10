@@ -20,7 +20,7 @@ If you have any issue when install lazyman, install the gems below:
 
 Create a lazyman project 
 ------------------------
-In windows, open command console and type just like below:
+Open a command console and type just like below:
 
 	lazyman new your_project_name	
 		
