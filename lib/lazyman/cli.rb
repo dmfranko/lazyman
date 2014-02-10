@@ -3,11 +3,9 @@ require 'thor'
 module Lazyman
   class CLI < Thor
     include Thor::Actions
-    argument :name
 
     def self.source_root
       File.join File.dirname(__FILE__)
-      #File.join File.dirname(__FILE__), 'generators'
     end
 
     def self.source_paths
@@ -15,8 +13,9 @@ module Lazyman
       [source_root + '/generators', source_root + '/templates']
     end
     
-    desc 'new', 'create a lazyman project'
-    def new
+    desc 'new NAME', 'create a lazyman project'
+    def new(name)
+      @name = name
       if name
         directory 'lazyman', name
       else
@@ -25,7 +24,6 @@ module Lazyman
     end
 
     desc 'run ', 'run test case with rspec'
-
     def start
       ARGV.shift
       puts "rspec #{ARGV.join('')}" if $debug
@@ -39,20 +37,21 @@ module Lazyman
       run 'bin/console'
     end
     
-    desc "new_page", "create a new page"
-    def new_page
+    desc "new_page NAME", "create a new page"
+    def new_page(name)
       template('template_page.rb.tt', "./app/pages/#{name}_page.rb")
     end
     
 
-    desc "new_spec", "create a new spec"
+    desc "new_spec NAME ", "create a new spec"
+    option :type,:required => false
     method_option :type,
       :default => "browser",
       :aliases => "-t",
       :desc => "which type of template to create [browser,webService,plain]."
 
     # Could probably stand to DRY this up a bit, but it works fine.
-    def new_spec
+    def new_spec(name)
       case options["type"].downcase
       when "browser"
         template('browser_spec_template.rb.tt', "./app/spec/#{name}_spec.rb")

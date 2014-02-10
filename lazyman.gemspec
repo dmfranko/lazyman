@@ -60,6 +60,7 @@ Gem::Specification.new do |s|
     "lib/lazyman/lazy_config.rb",
     "lib/lazyman/lazy_initializer.rb",
     "lib/lazyman/page_override.rb",
+    "lib/lazyman/watir_browser.rb",
     "lib/lazyman/templates/browser_spec_template.rb.tt",
     "lib/lazyman/templates/mobile_template.rb.tt",
     "lib/lazyman/templates/plain_template.rb.tt",

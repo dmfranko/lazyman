@@ -1,6 +1,4 @@
 ENV.delete 'HTTP_PROXY' if ENV['HTTP_PROXY']
-require 'rubygems' #just in case
-require 'rubygems' #for ruby187
 require 'erb'
 require 'psych'
 require 'rspec-rerun'
@@ -9,53 +7,49 @@ require 'lazyman'
 require 'active_record'
 require 'net/http'
 require 'byebug'
+require 'rest_client'
+require 'sauce_whisk'
+require 'watir-browser-factory'
+require 'rspec-rest-formatter'
 
 Dir["./app/spec/support/**/*.rb"].sort.each {|f|require f}
 
 SAUCE_USERNAME = ""
 SAUCE_ACCESS_KEY = ""
 
-<% require 'active_support/all' %>
-Lazyman::Initializer.new(File.expand_path(File.join('.')), '<%= name %>')
-$:.unshift(File.expand_path File.join('.'))
-
-ActiveRecord::Base.establish_connection(
-:adapter  => 'sqlite3',
-:database => '/Users/admin/Documents/Aptana Studio 3 Workspace/Misc/SinatraandCas/selfservice.db')
-
-class RuntimeConfiguration < ActiveRecord::Base
-  serialize :browsers, Array
-  serialize :emails, Array
-  serialize :environments, Array
-  serialize :tags, Array
-end
-
-def remote?
-  if ActiveRecord::Base.connection.table_exists? 'runtime_configurations'
-    @conf = RuntimeConfiguration.find_by_name("trial")
+class Hash
+  def find_all_values_for(key)
+    result = []
+    result << self[key]
+    self.values.each do |hash_value|
+      values = [hash_value] unless hash_value.is_a? Array
+      if values
+        values.each do |value|
+          result += value.find_all_values_for(key) if value.is_a? Hash
+        end
+      end
+    end
+    result.compact
   end
 end
 
-if remote?
-  $browsers = @conf.browsers
-  $emails = @conf.emails
-  $environments = @conf.environments
-else
-  puts "We're running locally OR we don't have a connection"
-  # We're running locally so get our local config
-  
-  $browsers = $config.browsers
-  $emails = $config.emails
-end
+<% require 'active_support/all' %>
+Lazyman::Initializer.new(File.expand_path(File.join('.')), '<%= @name %>')
+$:.unshift(File.expand_path File.join('.'))
 
+# Make sure all of our supporting files are loaded
+Dir["./app/spec/support/**/*.rb"].sort.each {|f|require f}
+
+Lazyman::Initializer.new(File.expand_path(File.join('.')), 'trial2')
+$:.unshift(File.expand_path File.join('.'))
 
 RSpec.configure do |c|
   c.treat_symbols_as_metadata_keys_with_true_values = true
   c.run_all_when_everything_filtered = true
   c.alias_example_to :test_case
   c.alias_it_should_behave_like_to :include_shared
+  
   c.color_enabled = true
-  c.include SpecTestHelper
   
   # Force expect syntax
   c.expect_with :rspec do |e|
@@ -68,7 +62,7 @@ RSpec.configure do |c|
     
     # User the dry run formatter
     c.add_formatter("DryRunFormatter")
-    c.add_formatter("documentation")
+    #c.add_formatter("documentation")
     # Make everything fail
     
     c.before(:all) do
@@ -77,30 +71,25 @@ RSpec.configure do |c|
     
     # We'll collect our keys into an array
     $KEYS = []
-    c.before :each do |x|
+    c.before(:each) do |x|
       keys = x.example.metadata.each_key.to_a
-
       keys.each do |k|
        $KEYS.push k  
       end
     end
   
-  
     c.after(:suite) {
-    r = RuntimeConfiguration.find_by_name("trial")
-    
-    # Strip out any rspec keys/tags to get just the ones we've added    
-    d = [:description_args,:caller,:execution_result,:example_group,:example_group_block]
-    d.each {|k| $KEYS.delete(k)}
-    r.tags = $KEYS.uniq.to_a
-    puts r.tags
-    r.save
-    #Runtimes.destroy_all
+      # Strip out any rspec keys/tags to get just the ones we've added    
+      d = [:description_args,:caller,:execution_result,:example_group,:example_group_block]
+      d.each {|k| $KEYS.delete(k)
+    }
   }
   else
       # Add formatters
       c.add_formatter("Fuubar")
-      c.add_formatter("Lazyman::LazymanFormatter")
+      #c.add_formatter("Lazyman::LazymanFormatter")
+      # Check to make sure we can reach our service
+      c.add_formatter("RestFormatter")
     
       # If there is a tag value and no one has passed a filter to rspec use the config
       if $config.tags && c.inclusion_filter.empty?
