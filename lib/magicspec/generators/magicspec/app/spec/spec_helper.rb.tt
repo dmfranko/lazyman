@@ -6,9 +6,6 @@ require 'fuubar'
 require 'magicspec' 
 require 'active_record'
 require 'net/http'
-require 'byebug'
-require 'rest_client'
-require 'sauce_whisk'
 require 'watir-browser-factory'
 require 'rspec-rest-formatter'
 
@@ -39,6 +36,32 @@ $:.unshift(File.expand_path File.join('.'))
 
 # Make sure all of our supporting files are loaded
 Dir["./app/spec/support/**/*.rb"].sort.each {|f|require f}
+
+# Determine if we're local or not and setup accordingly.
+if ENV['RUNTIME']
+  $params = eval(ENV['RUNTIME']) 
+  $caps = {
+    :browserName => $params[:platform]["browser"],
+    :browser_version => $params[:platform]["version"],
+    :os => $params[:platform]["os"],
+    :local => false
+  }
+  $metadata = {
+    :notes => $params[:notes],
+    :description => $config[:description]
+  }
+else
+  $caps = {
+    :browserName => $config["browser"],
+    :browser_version => "TBD",
+    :os => Uname.uname["sysname"],
+    :local => true
+    }
+  $metadata = {
+    :notes => $config[:notes],
+    :description => $config[:description]
+  }  
+end
 
 RSpec.configure do |c|
   c.treat_symbols_as_metadata_keys_with_true_values = true
