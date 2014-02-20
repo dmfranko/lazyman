@@ -3,7 +3,7 @@ magicspec
 
 A simple web automation test framework using [selenium-webdriver](http://docs.seleniumhq.org/projects/webdriver/),[watir-webdriver](https://github.com/watir/watir-webdriver),[page-object](https://github.com/cheezy/page-object) and [rspec](https://github.com/rspec/rspec). 
 
-This should get you up and running magically.
+This should get you up and running magically.  Much like rails this should scaffold tests and make it easy to add new specs an pages using generators and templates.
 
 Install magicspec
 ---------------
