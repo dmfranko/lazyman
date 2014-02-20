@@ -13,11 +13,6 @@ Install magicspec from rubygems
 
 Or clone from github, build the gem and install 
 
-If you have any issue when install magicspec, install the gems below:
-	
-	gem install thor
-
-
 Create a magicspec project 
 ------------------------
 Open a command console and type just like below:
@@ -35,6 +30,12 @@ Using following command to make everything running.
 
 	cd your_project_name
 	rspec
+
+Add a new spec
+------------
+
+Add a new page
+------------
 
 Using Console
 -------------
