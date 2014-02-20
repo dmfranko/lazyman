@@ -5,36 +5,36 @@ A simple web automation test framework using [selenium-webdriver](http://docs.se
 
 This should get you up and running magically.
 
-Install lazyman
+Install magicspec
 ---------------
-Install lazyman from rubygems
+Install magicspec from rubygems
 
-	gem install lazyman
+	gem install magicspec
 
 Or clone from github, build the gem and install 
 
-If you have any issue when install lazyman, install the gems below:
+If you have any issue when install magicspec, install the gems below:
 	
 	gem install thor
 
 
-Create a lazyman project 
+Create a magicspec project 
 ------------------------
 Open a command console and type just like below:
 
-	lazyman new your_project_name	
+	magicspec new your_project_name	
 		
 Run Examples
 ------------
 
-Lazyman contains some examples that explain how to use lazyman writing your own test cases.
+Lazyman contains some examples that explain how to use magicspec writing your own test cases.
 
-By default, lazyman runs examples using chrome browser, so make sure you installed google chrome and according [chrome driver](http://code.google.com/p/chromedriver/downloads/list)
+By default, magicspec runs examples using chrome browser, so make sure you installed google chrome and according [chrome driver](http://code.google.com/p/chromedriver/downloads/list)
 
 Using following command to make everything running.
 
 	cd your_project_name
-	lazyman go  
+	magicspec go  
 
 Lazyman go command supports all the rspec options and it is the recommend way.
 
@@ -45,7 +45,7 @@ Using Console
 You can use eat console to debug your test in irb.
 
 	cd your_project_name
-	lazyman c
+	magicspec c
 
 Lazyman will load all your pages, start irb and open browser which was defined in your config.yml.
 
@@ -57,10 +57,10 @@ Then you can use $navi variable the same way in your test file.
 
 You can type everything just like you are write a text case.
 
-Understand lazyman project structure
+Understand magicspec project structure
 ------------------------------------
 
-Lazyman project has a clean and simple structure. 
+A magicspec project has a clean and simple structure. 
 
 * app: holds your test codes;
 * config: where your config file placed;
@@ -76,7 +76,7 @@ Lazyman project has a clean and simple structure.
 * app->support->matchers: defind your owner rspec matchers here.
 
 
-Contributing to lazyman
+Contributing to magicspec
 -----------------------
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
