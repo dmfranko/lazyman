@@ -10,6 +10,7 @@ gem "rspec-rerun"
 gem "fuubar"
 gem "thor"
 gem "watir-browser-factory"
+gem "net-ping"
 
 group :development do
   gem "rdoc"

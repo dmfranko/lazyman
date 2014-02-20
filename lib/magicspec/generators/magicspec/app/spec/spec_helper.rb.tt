@@ -53,8 +53,8 @@ if ENV['RUNTIME']
 else
   $caps = {
     :browserName => $config["browser"],
-    :browser_version => "TBD",
-    :os => Uname.uname["sysname"],
+    :browser_version => "unknown",
+    :os => RbConfig::CONFIG["host_os"],
     :local => true
     }
   $metadata = {
@@ -108,8 +108,11 @@ RSpec.configure do |c|
       # Add formatters
       c.add_formatter("Fuubar")
       #c.add_formatter("Lazyman::LazymanFormatter")
-      # Check to make sure we can reach our service
-      c.add_formatter("RestFormatter")
+      # Check to make sure we can reach our service and if so push reports to there.
+      HOST = "http://localhost:3000"
+	  if JSON.parse(RestClient.get("#{HOST}/about/summary.json"))["status"] == "up"
+	    c.add_formatter("RestFormatter")
+  	  end
     
       # If there is a tag value and no one has passed a filter to rspec use the config
       if $config.tags && c.inclusion_filter.empty?

@@ -2,8 +2,8 @@ require 'erb'
 require 'rspec/core/formatters/html_formatter'
 require './config/override'
 
-module Lazyman
-  class LazymanFormatter < ::RSpec::Core::Formatters::HtmlFormatter
+module Magicspec
+  class MagicspecFormatter < ::RSpec::Core::Formatters::HtmlFormatter
     def initialize(output)
       output = File.new(File.expand_path(File.join('.', 'app', 'reports', "#{Time.now.strftime("%Y%m%d_%H%M%S")}.html")), 'w')
       super(output)
@@ -12,20 +12,19 @@ module Lazyman
       end #define_method
     end
 
+    # Check if this is browser and we'll add some content.
     def example_failed(example)
       super(example)
       if $navi
         failed_url = $navi.url rescue $navi.current_url
         @printer.puts "<a target=\"_blank\" href=\"#{failed_url}\">failed url is [#{failed_url}]</a>"
         @printer.puts '<br />'
-        @printer.puts '<p>Extra problem text</p>'
         @printer.flush
       end #if
     end
 
     def example_passed(example)
       super(example)
-      @printer.puts "<p>I'm here.</p>"
       @printer.flush
     end
 
@@ -43,5 +42,5 @@ module Lazyman
         super + content.join($/)
       end
     end
-  end #LazymanFormatter
-end #Lazyman
+  end #MagicspecFormatter
+end #Magicspec

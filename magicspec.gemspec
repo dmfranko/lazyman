@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "magicspec"
-  s.version = "0.0.1"
+  s.version = "0.0.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["easonhan,dmfranko"]
-  s.date = "2013-12-18"
+  s.authors = ["dmfranko"]
+  s.date = "2014-02-18"
   s.description = "A test framework using watir-webdriver rspec and page-object"
   s.email = "dan.franko@yale.edu"
   s.executables = ["magicspec"]
@@ -58,7 +58,6 @@ Gem::Specification.new do |s|
     "lib/magicspec/magicspec_config.rb",
     "lib/magicspec/magicspec_initializer.rb",
     "lib/magicspec/page_override.rb",
-    "lib/magicspec/watir_browser.rb",
     "lib/magicspec/templates/browser_spec_template.rb.tt",
     "lib/magicspec/templates/mobile_template.rb.tt",
     "lib/magicspec/templates/plain_template.rb.tt",
@@ -93,6 +92,11 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<page-object>, [">= 0"])
       s.add_runtime_dependency(%q<thor>, [">= 0"])
+      s.add_runtime_dependency(%q<rspec>, [">= 0"])
+      s.add_runtime_dependency(%q<fuubar>, [">= 0"])
+      s.add_runtime_dependency(%q<rspec-rerun>, [">= 0"])
+      s.add_runtime_dependency(%q<watir-webdriver>, [">= 0"])
+      s.add_runtime_dependency(%q<watir-browser-factory>, [">= 0"])
       s.add_development_dependency(%q<rdoc>, [">= 0"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, [">= 0"])
