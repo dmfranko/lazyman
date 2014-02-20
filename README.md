@@ -34,11 +34,9 @@ By default, magicspec runs examples using chrome browser, so make sure you insta
 Using following command to make everything running.
 
 	cd your_project_name
-	magicspec go  
+	rspec
 
 Lazyman go command supports all the rspec options and it is the recommend way.
-
-You can find test report in app/reports folder. It is a html file with current time stamp.
 
 Using Console
 -------------
@@ -49,20 +47,12 @@ You can use eat console to debug your test in irb.
 
 Lazyman will load all your pages, start irb and open browser which was defined in your config.yml.
 
-Then you can use $navi variable the same way in your test file.
-
-	p = $navi.goto_baidu_page
-	p.keyword="watir-webdriver"
-	p.search_element.click
-
-You can type everything just like you are write a text case.
-
 Understand magicspec project structure
 ------------------------------------
 
 A magicspec project has a clean and simple structure. 
 
-* app: holds your test codes;
+* app: holds your test code;
 * config: where your config file placed;
 
 * app->pages: puts all your pages files here;
