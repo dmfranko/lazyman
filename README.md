@@ -9,7 +9,8 @@ Install magicspec
 ---------------
 Install magicspec from rubygems
 
-	gem install magicspec
+	Open a Windows Command tool.
+	At the command prompt, type "gem install magicspec"
 
 Or clone from github, build the gem and install 
 
