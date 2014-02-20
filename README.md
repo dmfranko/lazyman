@@ -36,16 +36,12 @@ Using following command to make everything running.
 	cd your_project_name
 	rspec
 
-Lazyman go command supports all the rspec options and it is the recommend way.
-
 Using Console
 -------------
 You can use eat console to debug your test in irb.
 
 	cd your_project_name
 	magicspec c
-
-Lazyman will load all your pages, start irb and open browser which was defined in your config.yml.
 
 Understand magicspec project structure
 ------------------------------------
