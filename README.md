@@ -10,7 +10,6 @@ Install magicspec
 Install magicspec from rubygems
 
 	gem install magicspec
-	word
 
 Or clone from github, build the gem and install 
 
