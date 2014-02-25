@@ -9,50 +9,27 @@ Install magicspec
 ---------------
 Install magicspec from rubygems
 
-	Open a Windows Command Prompt.
+	Open a Windows Command tool.
 	At the command prompt, type "gem install magicspec"
 
 Or clone from github, build the gem and install 
 
 Create a magicspec project 
 ------------------------
-Open a Windows Command Prompt. Switch directories to some location suitable for storing your project. 
+Open a command console and type just like below:
 
-Example:
-
-	C:\Windows\System32>cd ../../Users/dv223/"My Documents"
-
-
-Type the dialog below to create your project.
-*Note: Project name must not contain spaces!
-
-	magicspec new <your_project_name_here>	
-
-Change directories into the directory to make sure it exists.
-
-
-	cd <your_project_name_here)
-
-The directory should contain these three folders;
-
-	app
-	bin
-	config
-
-The directory should contain the this file;
-
-	.rspec
-
+	magicspec new your_project_name	
+		
 Run Examples
 ------------
 
 Lazyman contains some examples that explain how to use magicspec writing your own test cases.
 
-By default, magicspec runs examples using chrome browser. Make certain Google Chrome is installed with the approriate driver [chrome driver](http://code.google.com/p/chromedriver/downloads/list)
+By default, magicspec runs examples using chrome browser, so make sure you installed google chrome and according [chrome driver](http://code.google.com/p/chromedriver/downloads/list)
 
-Within a Command Prompt window, use the following command to make sure everything is configured properly.
+Using following command to make everything running.
 
-	cd <your_project_name_here>
+	cd your_project_name
 	rspec
 
 Add a new spec
