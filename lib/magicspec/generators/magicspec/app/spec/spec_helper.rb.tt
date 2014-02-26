@@ -4,7 +4,6 @@ require 'psych'
 require 'rspec-rerun'
 require 'fuubar'
 require 'magicspec' 
-require 'active_record'
 require 'net/http'
 require 'watir-browser-factory'
 
