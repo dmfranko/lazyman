@@ -1,10 +1,6 @@
 require 'rspec'
 require 'rspec/core/formatters/base_text_formatter'
 require 'rspec/core/formatters/html_printer'
-require 'gmail'
-require 'sys/uname'
-
-include Sys
 
 #https://github.com/GICodeWarrior/threaded-rspec
 
@@ -37,23 +33,10 @@ module RSpec
 
           @output.puts "<script type=\"text/javascript\">document.getElementById('duration').innerHTML = \"Finished in <strong>#{formatted_duration} seconds</strong>\";</script>"
           @output.puts "<script type=\"text/javascript\">document.getElementById('totals').innerHTML = \"#{totals}\";</script>"
-          @output.puts "<script type=\"text/javascript\">document.getElementById('browser').innerHTML = \"#{Uname.sysname}\";</script>"
           @output.puts "</div>"
           @output.puts "</div>"
           @output.puts "</body>"
           @output.puts "</html>"
-
-          # Send a note to all the emails!
-          gmail = Gmail.new("yaleqa@gmail.com","")
-          gmail.deliver do
-            to $emails
-            subject "Test is complete!"
-            html_part do
-              content_type 'text/html; charset=UTF-8'
-              body "<p>Done!</p><p>#{totals}</p>"
-            end
-          #add_file "/path/to/some_image.jpg"
-          end
         end
 
         YALE_REPORT_HEADER = <<-EOF
@@ -126,14 +109,6 @@ module RSpec
   </div>
   <div id="deets">
   <table class="table table-bordered table-condensed table-responsive">
-    <tr>
-      <td>Browser</td>
-      <td id="browser"></td>
-    </tr>
-    <tr>
-      <td>OS</td>
-      <td id="OS">Mac</td>
-    </tr>
     <tr>
       <td>Date</td>
       <td id="Date">#{Time.now.to_s}</td>

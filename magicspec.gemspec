@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "magicspec"
-  s.version = "0.0.5"
+  s.version = "0.0.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["dmfranko"]
-  s.date = "2014-02-18"
+  s.date = "2014-02-26"
   s.description = "A test framework using watir-webdriver rspec and page-object"
   s.email = "dan.franko@yale.edu"
   s.executables = ["magicspec"]

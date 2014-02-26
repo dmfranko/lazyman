@@ -7,7 +7,6 @@ require 'magicspec'
 require 'active_record'
 require 'net/http'
 require 'watir-browser-factory'
-require 'rspec-rest-formatter'
 
 Dir["./app/spec/support/**/*.rb"].sort.each {|f|require f}
 
@@ -105,14 +104,20 @@ RSpec.configure do |c|
     }
   }
   else
-      # Add formatters
-      c.add_formatter("Fuubar")
-      #c.add_formatter("Lazyman::LazymanFormatter")
-      # Check to make sure we can reach our service and if so push reports to there.
-      HOST = "http://localhost:3000"
-	  if JSON.parse(RestClient.get("#{HOST}/about/summary.json"))["status"] == "up"
-	    c.add_formatter("RestFormatter")
-  	  end
+
+	# Add formatters
+    c.add_formatter("Fuubar")
+    # Check to make sure we can reach our service
+    HOST = "http://localhost:3000"
+    begin 
+      if JSON.parse(RestClient.get("#{HOST}/about/summary.json"))["status"] == "up"
+        c.add_formatter("RestFormatter")
+      else
+        c.add_formatter("Lazyman::LazymanFormatter")
+      end
+    rescue
+      c.add_formatter("Lazyman::LazymanFormatter")
+    end
     
       # If there is a tag value and no one has passed a filter to rspec use the config
       if $config["tags"] && c.inclusion_filter.empty?
