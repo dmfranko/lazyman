@@ -115,13 +115,13 @@ RSpec.configure do |c|
   	  end
     
       # If there is a tag value and no one has passed a filter to rspec use the config
-      if $config.tags && c.inclusion_filter.empty?
-        unless($config.tags.empty?)
+      if $config["tags"] && c.inclusion_filter.empty?
+        unless($config["tags"].empty?)
           tags = case 
             when String
-              $config.tags.lazy_to_hash
+              $config["tags"].lazy_to_hash
             when Hash
-              $config.tags
+              $config["tags"]
             end #case
           c.filter_run tags
         end 
