@@ -8,8 +8,7 @@ module Magicspec
 		
 		def initialize filepath
 			@f ||= filepath if valid?(filepath)
-			File.open(@f) {|handle| @hash_content = YAML.load(handle)}
-			@content = OpenStruct.new(@hash_content)
+			File.open(@f) {|handle| @content = YAML.load(handle)}
 		end
 		
 		def valid?(filepath)
