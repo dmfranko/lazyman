@@ -4,7 +4,7 @@ require File.expand_path 'app/spec/spec_helper'
 # Remember to tag your tests!
 # You can add multiple tags
 describe "The browser template",:template do
-	# These are the things you do to setup you test.
+	# These are the things your do to setup you test.
 	# For example start the browser or gather data.
 	before(:all) do
 		@browser = Watir::Browser.sauce_start($caps)
