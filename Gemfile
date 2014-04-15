@@ -11,7 +11,9 @@ gem "fuubar"
 gem "thor"
 gem "watir-browser-factory"
 gem "net-ping"
-gem 'rspec-rest-formatter', :git => 'https://git.yale.edu/YaleQA/rspec-rest-formatter'
+gem 'rspec-rest-formatter', :git => 'https://git.yale.edu/YaleQA/rspec-rest-formatter.git'
+gem 'info_vault', :git => 'https://git.yale.edu/YaleQA/info_vault.git'
+
 
 group :development do
   gem "rdoc"

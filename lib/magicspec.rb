@@ -1,4 +1,4 @@
-require 'active_support/all' # need be replaced, only required string of active support 
+#require 'active_support/all' # need be replaced, only required string of active support 
 require 'watir-webdriver'
 require 'page-object'
 require 'magicspec/ext/string'

@@ -9,7 +9,6 @@ module Magicspec
     end
 
     def self.source_paths
-      puts source_root
       [source_root + '/generators', source_root + '/templates']
     end
     
@@ -27,7 +26,6 @@ module Magicspec
     def start
       ARGV.shift
       puts "rspec #{ARGV.join('')}" if $debug
-      #run "LOCAL=true rspec #{ARGV.join('')}"
       run "LOCAL=true rspec"
     end
 

@@ -28,7 +28,6 @@ class Hash
   end
 end
 
-<% require 'active_support/all' %>
 Magicspec::Initializer.new(File.expand_path(File.join('.')), '<%= @name %>')
 $:.unshift(File.expand_path File.join('.'))
 
@@ -41,10 +40,11 @@ if ENV['RUNTIME']
   $caps = {
     :browserName => $params[:platform]["browser"],
     :browser_version => $params[:platform]["version"],
-    :os => $params[:platform]["os"],
+    :platform => $params[:platform]["os"],
     :local => false
   }
   $metadata = {
+    :app_id => $config["app_id"],
     :notes => $params[:notes],
     :description => $config[:description]
   }
@@ -52,16 +52,24 @@ else
   $caps = {
     :browserName => $config["browser"],
     :browser_version => "unknown",
-    :os => RbConfig::CONFIG["host_os"],
+    :platform => RbConfig::CONFIG["host_os"],
     :local => true
     }
   $metadata = {
+    :app_id => $config["app_id"],
     :notes => $config[:notes],
     :description => $config[:description]
   }  
 end
 
 RSpec.configure do |c|
+  # Read all of the config files to a instance variable containing a hash of the same name.
+  c.before(:all) {
+    Dir["./app/test_data/**/*.yml"].each do |f|
+      instance_variable_set("@#{File.basename(f,'.*')}",YAML.load_file(f))
+    end
+  }
+  
   c.treat_symbols_as_metadata_keys_with_true_values = true
   c.run_all_when_everything_filtered = true
   c.alias_example_to :test_case
@@ -131,14 +139,4 @@ RSpec.configure do |c|
         end 
       end
   end
-
-	def test_data file
-		content = ''
-		file_path = File.expand_path(File.join('.', 'app', 'test_data', "#{file}.yml"))
-		raise "Can not find #{file}.yml" unless File.exists?(file_path)
-		File.open(file_path, 'r') do |handle|
-			content = handle.read
-		end
-		Psych.load ERB.new(content).result(binding)
-	end
 end
