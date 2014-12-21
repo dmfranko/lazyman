@@ -22,7 +22,7 @@ Open a command console and type just like below:
 Run Examples
 ------------
 
-Lazyman contains some examples that explain how to use magicspec writing your own test cases.
+Magicspec contains some examples that explain how to use magicspec writing your own test cases.
 
 By default, magicspec runs examples using chrome browser, so make sure you installed google chrome and according [chrome driver](http://code.google.com/p/chromedriver/downloads/list)
 
@@ -33,50 +33,32 @@ Using following command to make everything running.
 
 Add a new spec
 ------------
+magicspec new_spec NAME
 
 Add a new page
 ------------
+magicspec new_page NAME
 
-Using Console
--------------
-You can use eat console to debug your test in irb.
-
-	cd your_project_name
-	magicspec c
+Running
+------------
+Althogh there is a magicspec run command, you can and should use the usual rspec commands.
 
 Understand magicspec project structure
 ------------------------------------
 
 A magicspec project has a clean and simple structure. 
 
-* app: holds your test code;
-* config: where your config file is placed.  You set things such as tags and your browser here.
+* app: The top folder that contains test code.
+* config: The folder which holds .  You set things such as tags and your browser here.
 
-* app->pages: puts all your pages files here;
-* app->pages->components: sometimes,there are some html element that could be reused more than once, define a component, place the file here and you can include your components in your pages.
+* app->pages: Page files are here.
+* app->pages->components: Reusable page components.
 
-* app->spec: holds your testcase files;
-* app->spec->shared: Imaging that, you are testing a system which need to login before any actions, so you want to define a login function which can be called from your cases. Define reused cases here.
+* app->spec: Spec files are located here.
+* app->spec->shared: Reusable components here.
 
-* app->reports: the fold holds your test reports.
+* app->reports: This folder holds your test reports.
 
 * app->support->matchers: defind your owner rspec matchers here.
 
-
-Contributing to magicspec
------------------------
- 
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
-* Fork the project.
-* Start a feature/bugfix branch.
-* Commit and push until you are happy with your contribution.
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
-
-Copyright
----------
-
-Copyright (c) 2013 easonhan. See LICENSE.txt for
-further details.
 
