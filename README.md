@@ -19,6 +19,12 @@ Open a command console and type just like below:
 
 	magicspec new your_project_name	
 		
+Install project dependencies
+------------
+Dependencies are mangaged via bundler.
+Go to the root folder and run `bundle install`
+
+
 Run Examples
 ------------
 
