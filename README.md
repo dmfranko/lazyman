@@ -22,7 +22,8 @@ Open a command console and type just like below:
 Install project dependencies
 ------------
 Dependencies are mangaged via bundler.
-Go to the root folder and run `bundle install`
+Go to the root folder of your newly created and run `bundle install`.
+Any additional required gems should be added here going forward.
 
 
 Run Examples
