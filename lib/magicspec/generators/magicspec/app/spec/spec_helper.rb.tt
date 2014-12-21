@@ -2,10 +2,24 @@ ENV.delete 'HTTP_PROXY' if ENV['HTTP_PROXY']
 require 'erb'
 require 'psych'
 require 'rspec-rerun'
+require 'rspec/retry'
 require 'fuubar'
 require 'magicspec' 
 require 'net/http'
 require 'watir-browser-factory'
+require 'securerandom'
+require 'info_vault'
+require 'rest_client'
+require 'json'
+require 'backports/2.0.0'
+
+# byebug is only supported on > ruby 2.0
+
+begin
+  require 'byebug'
+rescue LoadError
+  nil
+end
 
 Dir["./app/spec/support/**/*.rb"].sort.each {|f|require f}
 
@@ -36,107 +50,119 @@ Dir["./app/spec/support/**/*.rb"].sort.each {|f|require f}
 
 # Determine if we're local or not and setup accordingly.
 if ENV['RUNTIME']
-  $params = eval(ENV['RUNTIME']) 
-  $caps = {
-    :browserName => $params[:platform]["browser"],
-    :browser_version => $params[:platform]["version"],
-    :platform => $params[:platform]["os"],
-    :local => false
-  }
-  $metadata = {
-    :app_id => $config["app_id"],
-    :notes => $params[:notes],
-    :description => $config[:description]
-  }
+	$params = eval(ENV['RUNTIME']) 
+  	$caps = {
+    	:browserName => $params[:platform]["browser"],
+    	:browser_version => $params[:platform]["version"],
+    	:platform => $params[:platform]["os"],
+    	:local => false
+  	}
+  	$metadata = {
+    	:app_id => $config["app_id"],
+    	:test_id => $params[:test_id],
+    	:environment_id => $params[:environment]["id"],
+    	:platform_id => $params[:platform]["id"],
+    	:notes => $params[:notes],
+    	:description => $config[:description]
+  	}
+  
+  	$tags = $params[:tags]
+  	$filter = $params[:filter]
+  
+  	$config["environment"] = $params[:environment]["environment_name"].downcase
+  	$config["url"] = $params[:environment]["environment_url"]
 else
-  $caps = {
-    :browserName => $config["browser"],
-    :browser_version => "unknown",
-    :platform => RbConfig::CONFIG["host_os"],
-    :local => true
-    }
-  $metadata = {
-    :app_id => $config["app_id"],
-    :notes => $config[:notes],
-    :description => $config[:description]
-  }  
+  	$caps = {
+    	:browserName => $config["browser"],
+    	:browser_version => "unknown",
+    	:platform => RbConfig::CONFIG["host_os"],
+    	:local => true
+    	}
+  	$metadata = {
+    	:app_id => $config["app_id"],
+    	:notes => $config[:notes],
+    	:description => $config[:description]
+  	}  
+  
+  	$config["url"] = $config["host"][$config["environment"]]
+  
+  	if $config["tags"]
+    	$tags = Hash[*$config["tags"].split(',').map {|k| [k.to_sym, true]}.flatten]
+  	end
 end
 
 RSpec.configure do |c|
   # Read all of the config files to a instance variable containing a hash of the same name.
-  c.before(:all) {
-    Dir["./app/test_data/**/*.yml"].each do |f|
-      instance_variable_set("@#{File.basename(f,'.*')}",YAML.load_file(f))
-    end
-  }
+	c.before(:all) {
+    	Dir["./app/test_data/**/*.yml"].each do |f|
+      	instance_variable_set("@#{File.basename(f,'.*')}",YAML.load_file(f))
+    	end
+	}
   
-  c.treat_symbols_as_metadata_keys_with_true_values = true
-  c.run_all_when_everything_filtered = true
-  c.alias_example_to :test_case
-  c.alias_it_should_behave_like_to :include_shared
+	c.verbose_retry = true # show retry status in spec process
+  	c.treat_symbols_as_metadata_keys_with_true_values = true
+  	c.run_all_when_everything_filtered = true
+  	c.alias_example_to :test_case
+  	c.alias_it_should_behave_like_to :include_shared
+  	c.color_enabled = true
   
-  c.color_enabled = true
-  
-  # Force expect syntax
-  c.expect_with :rspec do |e|
-    e.syntax = :expect
-  end  
+	  # Force expect syntax
+  	c.expect_with :rspec do |e|
+   		e.syntax = :expect
+  	end  
 
 	if ENV['REFRESH']
-    # Set everyting to run
-    c.filter_run
+    	# Set everyting to run
+    	c.filter_run
     
-    # User the dry run formatter
-    c.add_formatter("DryRunFormatter")
-    #c.add_formatter("documentation")
-    # Make everything fail
+    	# User the dry run formatter
+    	c.add_formatter("DryRunFormatter")
     
-    c.before(:all) do
-        raise 'Fail each test immediately'
-    end
+	    c.before(:all) do
+	        raise 'Fail each test immediately'
+	    end
     
-    # We'll collect our keys into an array
-    $KEYS = []
-    c.before(:each) do |x|
-      keys = x.example.metadata.each_key.to_a
-      keys.each do |k|
-       $KEYS.push k  
-      end
-    end
+	    # We'll collect our keys into an array
+	    $KEYS = []
+	    c.before(:each) do |x|
+	      	keys = x.example.metadata.each_key.to_a
+	      	keys.each do |k|
+	       		$KEYS.push k  
+	      	end
+	    end
   
-    c.after(:suite) {
-      # Strip out any rspec keys/tags to get just the ones we've added    
-      d = [:description_args,:caller,:execution_result,:example_group,:example_group_block]
-      d.each {|k| $KEYS.delete(k)
-    }
-  }
-  else
-
-	# Add formatters
-    c.add_formatter("Fuubar")
-    # Check to make sure we can reach our service
-    HOST = "http://localhost:3000"
-    begin 
-      if JSON.parse(RestClient.get("#{HOST}/about/summary.json"))["status"] == "up"
-        c.add_formatter("RestFormatter")
-      else
-        c.add_formatter("Lazyman::LazymanFormatter")
-      end
-    rescue
-      c.add_formatter("Lazyman::LazymanFormatter")
-    end
+    	c.after(:suite) {
+      		# Strip out any rspec keys/tags to get just the ones we've added    
+      		d = [:description_args,:caller,:execution_result,:example_group,:example_group_block]
+      		d.each {|k| $KEYS.delete(k)}
+  		}
+  	else
+		# Add formatters
+    	c.add_formatter("Fuubar")
     
-      # If there is a tag value and no one has passed a filter to rspec use the config
-      if $config["tags"] && c.inclusion_filter.empty?
-        unless($config["tags"].empty?)
-          tags = case 
-            when String
-              $config["tags"].lazy_to_hash
-            when Hash
-              $config["tags"]
-            end #case
-          c.filter_run tags
-        end 
-      end
-  end
+    	# Check to make sure we can reach our service
+    	HOST = "http://localhost:3000"
+    	
+    	begin 
+      		if JSON.parse(RestClient.get("#{HOST}/about/summary.json"))["status"] == "up"
+        		c.add_formatter("RestFormatter")
+      		else
+        		c.add_formatter("Lazyman::LazymanFormatter")
+      		end
+    	rescue
+      		c.add_formatter("Lazyman::LazymanFormatter")
+    	end
+		
+		c.filter_run($tags.to_h)
+  	end
+  	
+  	def test_data file
+    	content = ''
+    	file_path = File.expand_path(File.join('.', 'app', 'test_data', "#{file}.yml"))
+    	raise "Can not find #{file}.yml" unless File.exists?(file_path)
+    	File.open(file_path, 'r') do |handle|
+      		content = handle.read
+    	end
+    	Psych.load ERB.new(content).result(binding)
+	end
 end
