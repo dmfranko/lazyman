@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
     "lib/magicspec/cli.rb",
     "lib/magicspec/errors.rb",
     "lib/magicspec/ext/string.rb",
+    "lib/magicspec/generators/magicspec/Gemfile",
     "lib/magicspec/generators/magicspec/.rspec",
     "lib/magicspec/generators/magicspec/app/matchers/.empty_directory",
     "lib/magicspec/generators/magicspec/app/pages/yale/yale_page.rb.tt",

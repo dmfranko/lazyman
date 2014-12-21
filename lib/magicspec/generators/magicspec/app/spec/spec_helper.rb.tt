@@ -1,17 +1,11 @@
 ENV.delete 'HTTP_PROXY' if ENV['HTTP_PROXY']
+
+require 'bundler'
+Bundler.require(:default)
+
 require 'erb'
-require 'psych'
-require 'rspec-rerun'
-require 'rspec/retry'
-require 'fuubar'
-require 'magicspec' 
-require 'net/http'
-require 'watir-browser-factory'
 require 'securerandom'
-require 'info_vault'
-require 'rest_client'
-require 'json'
-require 'backports/2.0.0'
+require 'net/http'
 
 # byebug is only supported on > ruby 2.0
 
