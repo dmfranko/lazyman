@@ -1,1 +1,3 @@
 --default-path=./app/spec
+-r rspec/legacy_formatters
+-r ./config/lazyman_formatter.rb
