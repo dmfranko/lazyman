@@ -47,3 +47,6 @@ pkg
 
 # For rubinius:
 #*.rbc
+
+#Ignore gem files
+magicspec-*.gem
