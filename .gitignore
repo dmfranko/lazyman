@@ -50,3 +50,5 @@ pkg
 
 #Ignore gem files
 magicspec-*.gem
+
+.project
